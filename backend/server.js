@@ -8,9 +8,9 @@ const app = express();
 
 app.use(express.static("public"));
 
-mongoose.connect( process.env.MONGODB_URL || 'mongodb://localhost/amazona', {
+mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/amazona', {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 });
 
 app.use('/api/users', userRouter);
