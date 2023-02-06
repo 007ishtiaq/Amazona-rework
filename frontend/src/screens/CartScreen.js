@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../actions/cartActions";
+import { addToCart, removeFromCart } from '../actions/cartActions';
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import MessageBox from "../components/MessageBox";
@@ -20,7 +20,7 @@ function CartScreen(props) {
     }
   }, [dispatch, productId, qty]);
   const removeFromCartHandler = (id) => {
-    // some remove work
+    dispatch(removeFromCart(id));
   };
   const checkoutHandler = (id) => {
     props.history.push('/signin?redirect=shipping')
@@ -76,7 +76,7 @@ function CartScreen(props) {
           </ul>
         )}
       </div>
-      <div className="clo-1">
+      <div className="col-1">
         <div className="card card-body">
           <ul>
             <li>
