@@ -17,6 +17,7 @@ const data = {
       ],
     products: [
         {
+        _id: '1',
         name: 'Shirt-my new pro iiiii',
         category: 'Cloths',
         image: '/images/product-1.jpg',
@@ -28,6 +29,7 @@ const data = {
         description: 'High Quality product'
         },
         {
+        _id: '2',
         name: 'Shirt-2',
         category: 'Cloths',
         image: '/images/product-1.jpg',
@@ -39,6 +41,7 @@ const data = {
         description: 'High Quality product'
         },
         {
+        _id: '3',
         name: 'Shirt-3',
         category: 'Cloths',
         image: '/images/product-1.jpg',
@@ -50,6 +53,7 @@ const data = {
         description: 'High Quality product'
         },
         {
+        _id: '4',
         name: 'Shirt-4',
         category: 'Cloths',
         image: '/images/product-1.jpg',
@@ -61,6 +65,7 @@ const data = {
         description: 'High Quality product'
         },
         {
+        _id: '5',
         name: 'Shirt-5',
         category: 'Cloths',
         image: '/images/product-1.jpg',
@@ -72,6 +77,7 @@ const data = {
         description: 'High Quality product'
         },
         {
+        _id: '6',
         name: 'Shirt-6',
         category: 'Cloths',
         image: '/images/product-1.jpg',
