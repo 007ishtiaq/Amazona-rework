@@ -203,7 +203,7 @@ img.large{
     display: block;
 }
 /* Dropdown */
-.dropdown {
+/* .dropdown {
     display: inline-block;
     position: relative;
   }
@@ -221,4 +221,4 @@ img.large{
   }
   .dropdown:hover .dropdown-content {
     display: block;
-  }
+  } */

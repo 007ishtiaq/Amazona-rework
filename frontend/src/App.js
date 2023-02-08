@@ -2,20 +2,21 @@ import { BrowserRouter , Route, Link } from "react-router-dom";
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
 import CartScreen from "./screens/CartScreen";
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import SigninScreen from "./screens/SigninScreen";
-import { signout } from './actions/userActions';
+// import { signout } from './actions/userActions';
 
 function App() {
   const cart = useSelector(state => state.cart);
   const {cartItems} = cart;
 
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
-  const dispatch = useDispatch();
-  const signoutHandler = () => {
-    dispatch(signout());
-  };
+  // const userSignin = useSelector((state) => state.userSignin);
+  // const { userInfo } = userSignin;
+  // const dispatch = useDispatch();
+  // const signoutHandler = () => {
+  //   dispatch(signout());
+  // };
   return (
     
     <BrowserRouter>
@@ -32,7 +33,8 @@ function App() {
               <span className="badge">{cartItems.length}</span>
             )}
             </Link>
-            {userInfo ? (
+            <Link to="/signin">Sign In</Link>
+            {/* {userInfo ? (
               <div className="dropdown">
                 <Link to="#">
                   {userInfo.name} <i className="fa fa-caret-down"></i>{' '}
@@ -47,7 +49,8 @@ function App() {
               </div>
             ) : (
               <Link to="/signin">Sign In</Link>
-            )}
+              
+            )} */}
           </div>
         </header>
         <main>
