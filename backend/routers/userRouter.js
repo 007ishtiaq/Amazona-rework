@@ -53,6 +53,6 @@ userRouter.post(
       token: generateToken(createdUser),
     });
   })
-  );
+);
 
 export default userRouter;
