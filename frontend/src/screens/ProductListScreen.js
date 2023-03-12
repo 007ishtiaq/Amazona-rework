@@ -16,7 +16,6 @@ import {
 export default function ProductListScreen(props) {
   const { pageNumber = 1 } = useParams();
 
-  const sellerMode = props.match.path.indexOf('/seller') >= 0;
   const productList = useSelector((state) => state.productList);
   const { loading, error, products, page, pages } = productList;
 
@@ -34,8 +33,7 @@ export default function ProductListScreen(props) {
     error: errorDelete,
     success: successDelete,
   } = productDelete;
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
+  
   const dispatch = useDispatch();
   useEffect(() => {
     if (successCreate) {
@@ -46,16 +44,14 @@ export default function ProductListScreen(props) {
       dispatch({ type: PRODUCT_DELETE_RESET });
     }
     dispatch(
-      listProducts({ seller: sellerMode ? userInfo._id : '', pageNumber })
+      listProducts({ pageNumber })
     );
   }, [
     createdProduct,
     dispatch,
     props.history,
-    sellerMode,
     successCreate,
     successDelete,
-    userInfo._id,
     pageNumber,
   ]);
 

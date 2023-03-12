@@ -20,8 +20,6 @@ import ProductEditScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
 import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
-import SellerRoute from './components/SellerRoute';
-import SellerScreen from './screens/SellerScreen';
 import SearchBox from './components/SearchBox';
 import SearchScreen from './screens/SearchScreen';
 import { listProductCategories } from './actions/productActions';
@@ -101,21 +99,6 @@ function App() {
             ) : (
               <Link to="/signin">Sign In</Link>
             )}
-            {userInfo && userInfo.isSeller && (
-              <div className="dropdown">
-                <Link to="#admin">
-                  Seller <i className="fa fa-caret-down"></i>
-                </Link>
-                <ul className="dropdown-content">
-                  <li>
-                    <Link to="/productlist/seller">Products</Link>
-                  </li>
-                  <li>
-                    <Link to="/orderlist/seller">Orders</Link>
-                  </li>
-                </ul>
-              </div>
-            )}
             {userInfo && userInfo.isAdmin && (
               <div className="dropdown">
                 <Link to="#admin">
@@ -170,7 +153,6 @@ function App() {
           </ul>
         </aside>
         <main>
-          <Route path="/seller/:id" component={SellerScreen}></Route>
           <Route path="/cart/:id?" component={CartScreen}></Route>
           <Route path="/product/:id" component={ProductScreen} exact></Route>
           <Route
@@ -234,16 +216,6 @@ function App() {
             path="/dashboard"
             component={DashboardScreen}
           ></AdminRoute>
-
-          <SellerRoute
-            path="/productlist/seller"
-            component={ProductListScreen}
-          ></SellerRoute>
-          <SellerRoute
-            path="/orderlist/seller"
-            component={OrderListScreen}
-          ></SellerRoute>
-
           <Route path="/" component={HomeScreen} exact></Route>
         </main>
         <footer className="row center">All right reserved</footer>

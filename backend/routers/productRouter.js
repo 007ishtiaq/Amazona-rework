@@ -3,7 +3,7 @@ import expressAsyncHandler from 'express-async-handler';
 import data from '../data.js';
 import Product from '../models/productModel.js';
 import User from '../models/userModel.js';
-import { isAdmin, isAuth, isSellerOrAdmin } from '../utils.js';
+import { isAdmin, isAuth } from '../utils.js';
 
 const productRouter = express.Router();
 
@@ -14,7 +14,6 @@ productRouter.get(
     const page = Number(req.query.pageNumber) || 1;
     const name = req.query.name || '';
     const category = req.query.category || '';
-    const seller = req.query.seller || '';
     const order = req.query.order || '';
     const min =
       req.query.min && Number(req.query.min) !== 0 ? Number(req.query.min) : 0;
@@ -26,7 +25,6 @@ productRouter.get(
         : 0;
 
     const nameFilter = name ? { name: { $regex: name, $options: 'i' } } : {};
-    const sellerFilter = seller ? { seller } : {};
     const categoryFilter = category ? { category } : {};
     const priceFilter = min && max ? { price: { $gte: min, $lte: max } } : {};
     const ratingFilter = rating ? { rating: { $gte: rating } } : {};
@@ -39,20 +37,17 @@ productRouter.get(
         ? { rating: -1 }
         : { _id: -1 };
     const count = await Product.count({
-      ...sellerFilter,
       ...nameFilter,
       ...categoryFilter,
       ...priceFilter,
       ...ratingFilter,
     });
     const products = await Product.find({
-      ...sellerFilter,
       ...nameFilter,
       ...categoryFilter,
       ...priceFilter,
       ...ratingFilter,
     })
-      .populate('seller', 'seller.name seller.logo')
       .sort(sortOrder)
       .skip(pageSize * (page - 1))
       .limit(pageSize);
@@ -91,10 +86,7 @@ productRouter.get(
 productRouter.get(
   '/:id',
   expressAsyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params.id).populate(
-      'seller',
-      'seller.name seller.logo seller.rating seller.numReviews'
-    );
+    const product = await Product.findById(req.params.id);
     if (product) {
       res.send(product);
     } else {
@@ -106,11 +98,10 @@ productRouter.get(
 productRouter.post(
   '/',
   isAuth,
-  isSellerOrAdmin,
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const product = new Product({
       name: 'sample name ' + Date.now(),
-      seller: req.user._id,
       image: '/images/p1.jpg',
       price: 0,
       category: 'sample category',
@@ -127,7 +118,7 @@ productRouter.post(
 productRouter.put(
   '/:id',
   isAuth,
-  isSellerOrAdmin,
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
     const product = await Product.findById(productId);

@@ -21,9 +21,7 @@ import {
   USER_DELETE_FAIL,
   USER_UPDATE_SUCCESS,
   USER_UPDATE_FAIL,
-  USER_TOPSELLERS_LIST_REQUEST,
-  USER_TOPSELLERS_LIST_SUCCESS,
-  USER_TOPSELLERS_LIST_FAIL,
+  USER_UPDATE_REQUEST,
 } from '../constants/userConstants';
 
 export const register = (name, email, password) => async (dispatch) => {
@@ -111,7 +109,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
   }
 };
 export const updateUser = (user) => async (dispatch, getState) => {
-  dispatch({ type: USER_UPDATE_PROFILE_REQUEST, payload: user });
+  dispatch({ type: USER_UPDATE_REQUEST, payload: user });
   const {
     userSignin: { userInfo },
   } = getState();
@@ -164,18 +162,5 @@ export const deleteUser = (userId) => async (dispatch, getState) => {
         ? error.response.data.message
         : error.message;
     dispatch({ type: USER_DELETE_FAIL, payload: message });
-  }
-};
-export const listTopSellers = () => async (dispatch) => {
-  dispatch({ type: USER_TOPSELLERS_LIST_REQUEST });
-  try {
-    const { data } = await Axios.get('/api/users/top-sellers');
-    dispatch({ type: USER_TOPSELLERS_LIST_SUCCESS, payload: data });
-  } catch (error) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message;
-    dispatch({ type: USER_TOPSELLERS_LIST_FAIL, payload: message });
   }
 };
