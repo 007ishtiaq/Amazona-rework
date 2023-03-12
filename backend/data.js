@@ -3,23 +3,15 @@ import bcrypt from 'bcryptjs';
 const data = {
   users: [
     {
-      name: 'Basir',
-      email: 'admin@example.com',
+      name: 'IshiAdmin',
+      email: 'a@b.com',
       password: bcrypt.hashSync('1234', 8),
       isAdmin: true,
-      isSeller: true,
-      seller: {
-        name: 'Puma',
-        logo: '/images/logo1.png',
-        description: 'best seller',
-        rating: 4.5,
-        numReviews: 120,
-      },
     },
     {
-      name: 'John',
-      email: 'user@example.com',
-      password: bcrypt.hashSync('1234', 8),
+      name: 'ishi-Kawa',
+      email: 'ab@cd.com',
+      password: bcrypt.hashSync('12345', 8),
       isAdmin: false,
     },
   ],
@@ -89,6 +81,12 @@ const data = {
       rating: 4.5,
       numReviews: 15,
       description: 'high quality product',
+    },
+  ],
+  banners: [
+    {
+      name: 'sample-banner',
+      image: '/images/sample-banner.png',
     },
   ],
 };

@@ -26,6 +26,8 @@ import { listProductCategories } from './actions/productActions';
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
 import DashboardScreen from './screens/DashboardScreen';
+import Notificationbanner from './components/Notificationbanner';
+import BannerEditScreen from './screens/BannerEditScreen';
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -49,6 +51,9 @@ function App() {
   }, [dispatch]);
   return (
     <BrowserRouter>
+    <Route
+        render={({ history }) => (<Notificationbanner history={history}></Notificationbanner>)}
+      ></Route>
       <div className="grid-container">
         <header className="row">
           <div>
@@ -116,6 +121,9 @@ function App() {
                   </li>
                   <li>
                     <Link to="/userlist">Users</Link>
+                  </li>
+                  <li>
+                    <Link to="/banneredit">Edit Banners</Link>
                   </li>
                 </ul>
               </div>
@@ -210,6 +218,10 @@ function App() {
           <AdminRoute
             path="/user/:id/edit"
             component={UserEditScreen}
+          ></AdminRoute>
+          <AdminRoute
+            path="/banneredit"
+            component={BannerEditScreen}
           ></AdminRoute>
 
           <AdminRoute
